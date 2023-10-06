@@ -12,6 +12,36 @@ console.log('hello world');
 
 
 
+function getMathFromServer() {
+    console.log('Start getMathFromServer');
+    axios.get('/result').then((response) => {
+    
+        let numbers = response.data;
+        let content = document.querySelector('#result');
+
+        content.innerHTML = '';
+        let i = 0;
+        for (let number of numbers) {
+            content.innerHTML +=   `
+                <div>${number.firstNumber} ${number.secondNumber} </div>
+            `;
+            i +=1;
+        }
+    }).catch((error) => {
+        console.error(error);
+        alert('Something went wrong!');
+    });
+    console.log('End getMathFromServer');
+} 
+
+
+
+
+
+
+
+
+
 
 
 
@@ -34,7 +64,7 @@ function sendMathToServer(event) {
         //mathOperator: mathOperatorPushed
     }).then((response) => {
         console.log('POST succesful!');
-        //getMathFromServer();
+        getMathFromServer();
     }).catch((error) => {
         console.error(error);
         alert('Something went wrong!');
