@@ -16,14 +16,14 @@
                 <label for="first-number"></label>
                 <input type="text" id="first-number" />
 
-                <button id="plus-button">+</button>
-                <button id="minus-button">-</button>
-                <button id="multiplication-button">*</button>
-                <button id="division-button">/</button>
+                <button id="plus-button" onClick="handleOperator(event)">+</button>
+                <button id="minus-button" onClick="handleOperator(event)">-</button>
+                <button id="multiplication-button" onClick="handleOperator(event)">*</button>
+                <button id="division-button" onClick="handleOperator(event)">/</button>
 
                 <label for="second-number"></label>
                 <input type="text" id="second-number" />
-                
+
                 <button id="equals-button" onClick="sendMathToServer(event)">=</button>
                 <button id="clear-button">C</button>
               </div>
