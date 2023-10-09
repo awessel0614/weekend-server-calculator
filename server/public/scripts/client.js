@@ -2,15 +2,13 @@ console.log('hello world');
 
 
 let operator ;
+let plusButton = document.querySelector('#plus-button');
+let minusButton = document.querySelector('#minus-button');
+let multButton = document.querySelector('#multiplication-button');
+let divButton = document.querySelector('#division-button');
 
 
 
-//so basically......
-
-//when the = button is pressed, it needs to capture the two number values and the value of the mathematical operator
-//the operator part is the one where im a little like, eh?
-
-getMathFromServer();
 
 function getMathFromServer() {
     
@@ -18,25 +16,39 @@ function getMathFromServer() {
     axios.get('/result').then((response) => {
         console.log(response.data);
         let numbers = response.data;
-        console.log(numbers.calculations);
-        console.log(numbers.results);
+        console.log("numbers.calculations",numbers.calculations);
+        console.log("numbers.calculationResults", numbers.calculationResults);
+
         let resultArea = document.querySelector('#result');
         let mathHistoryArea = document.querySelector('#math-history');
 
         resultArea.innerHTML ='';
         resultArea.innerHTML = `
-            ${numbers.results}
+            ${numbers.calculationResults[numbers.calculationResults.length-1]}
         `;
 
+        
+        /**
         mathHistoryArea.innerHTML = '';
-        let i = 0;
+        //let i = 0;
         for (let calculation of numbers.calculations) {
             console.log(calculation);
             mathHistoryArea.innerHTML +=   `
-                <div>${calculation.firstNumber} ${calculation.mathOperator} ${calculation.secondNumber}</div>
+                <div>${calculation.firstNumber} ${calculation.mathOperator} ${calculation.secondNumber} = ${numbers.calculationResults}</div>
             `;
-            i +=1;
+           // i +=1;
         }
+        */
+
+        mathHistoryArea.innerHTML = '';
+       
+        for (let i = 0; i <= numbers.calculations.length-1; i++) {
+            mathHistoryArea.innerHTML +=   `
+                <div>${numbers.calculations[i].firstNumber} ${numbers.calculations[i].mathOperator} ${numbers.calculations[i].secondNumber} = ${numbers.calculationResults[i]}</div>
+            `;
+           
+        }
+        
 
     }).catch((error) => {
         console.error(error);
@@ -44,6 +56,10 @@ function getMathFromServer() {
     });
     console.log('End getMathFromServer');
 } 
+
+
+
+
 
 
 
@@ -60,10 +76,15 @@ function sendMathToServer(event) {
 
     let firstNumberText = Number(document.querySelector('#first-number').value);
     let secondNumberText = Number(document.querySelector('#second-number').value);
-   // handleOperator(event);
     let answer = 0;
+
+    /** 
+    if (firstNumberText === NaN) {
+        console.log('Please enter a valid number!');
+    }
+    */
     
-    axios.post('/result', {
+    axios.post('/result', { 
         firstNumber: firstNumberText,
         secondNumber: secondNumberText,
         mathOperator: operator
@@ -82,7 +103,11 @@ function handleOperator(event) {
     event.preventDefault();
     operator = event.target.innerHTML;
 
-}
+    let thingyyy = event.target;
+
+    thingyyy.style.border = "thick solid black";
+    
+};
 
 
 
@@ -115,7 +140,16 @@ let secondNumberInput = document.querySelectorAll('#second-number');
 clearButton.addEventListener('click', () => {
     firstNumberInput.forEach(input => input.value = '');
     secondNumberInput.forEach(input => input.value = '');
+
+
+    plusButton.style.border = "";
+    minusButton.style.border = "";
+    multButton.style.border = "";
+    divButton.style.border = "";
+
 });
 
 
 
+//SOMETHING TO TRY LATER....maybe try pushing the result to numberList instead???
+//so get rid of the results array completely? i don't fucking know lol

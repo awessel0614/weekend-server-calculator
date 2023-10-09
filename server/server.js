@@ -13,15 +13,15 @@ app.use(express.static('server/public'));
 
 
 app.get('/result', (req, res) => {
-    console.log('Results made for /result');
+    console.log('Results made for /result', numberList, results);
     res.send({
         calculations: numberList,
-        results: result
+        calculationResults: results
     });
 });
 
 app.post('/result', (req, res) => {
-    console.log(req.body);
+    console.log("post", req.body);
     let calculation = req.body;
     numberList.push(calculation);
     doMath(numberList);
@@ -32,7 +32,7 @@ app.post('/result', (req, res) => {
 let result;
 function doMath(array) {
     for (let thingy of array) {
-        console.log(thingy.firstNumber);
+        console.log("thingy", thingy.firstNumber);
         if (thingy.mathOperator === '+') {
             result = thingy.firstNumber + thingy.secondNumber;
         }
@@ -46,8 +46,9 @@ function doMath(array) {
             result = thingy.firstNumber / thingy.secondNumber;
         }
     }
-    console.log(result);
+    console.log("result", result);
     results.push(result);
+    
 }
 
 
