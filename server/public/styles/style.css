@@ -9,3 +9,12 @@
 .calculator {
     font-size :30px;
 }
+
+
+button {
+    border: 1px solid black;
+}
+
+.thick {
+     border: 5px solid black;
+}

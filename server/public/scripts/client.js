@@ -101,12 +101,17 @@ function sendMathToServer(event) {
 
 function handleOperator(event) {
     event.preventDefault();
+    let operators = document.getElementsByClassName("operator");
+    for (let index = 0; index < operators.length; index++) {
+        operators[index].classList.remove("thick");
+    }
+    
     operator = event.target.innerHTML;
 
     let thingyyy = event.target;
 
-    thingyyy.style.border = "thick solid black";
-    
+    //thingyyy.style.border = "thick solid black";
+    thingyyy.classList.add("thick");
 };
 
 
@@ -141,11 +146,10 @@ clearButton.addEventListener('click', () => {
     firstNumberInput.forEach(input => input.value = '');
     secondNumberInput.forEach(input => input.value = '');
 
-
-    plusButton.style.border = "";
-    minusButton.style.border = "";
-    multButton.style.border = "";
-    divButton.style.border = "";
+    let operators = document.getElementsByClassName("operator");
+    for (let index = 0; index < operators.length; index++) {
+        operators[index].classList.remove("thick");
+    }
 
 });
 

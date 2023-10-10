@@ -48,6 +48,9 @@ function doMath(array) {
     }
     console.log("result", result);
     results.push(result);
+    let testpusharray = results
+    testpusharray[results.length - 1].result = result
+    console.log("testpusharray", testpusharray);    
     
 }
 
