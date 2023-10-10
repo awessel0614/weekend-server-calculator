@@ -27,18 +27,6 @@ function getMathFromServer() {
             ${numbers.calculationResults[numbers.calculationResults.length-1]}
         `;
 
-        
-        /**
-        mathHistoryArea.innerHTML = '';
-        //let i = 0;
-        for (let calculation of numbers.calculations) {
-            console.log(calculation);
-            mathHistoryArea.innerHTML +=   `
-                <div>${calculation.firstNumber} ${calculation.mathOperator} ${calculation.secondNumber} = ${numbers.calculationResults}</div>
-            `;
-           // i +=1;
-        }
-        */
 
         mathHistoryArea.innerHTML = '';
        
@@ -47,7 +35,7 @@ function getMathFromServer() {
                 <div>${numbers.calculations[i].firstNumber} ${numbers.calculations[i].mathOperator} ${numbers.calculations[i].secondNumber} = ${numbers.calculationResults[i]}</div>
             `;
            
-        }
+    }
         
 
     }).catch((error) => {
@@ -56,16 +44,6 @@ function getMathFromServer() {
     });
     console.log('End getMathFromServer');
 } 
-
-
-
-
-
-
-
-
-
-
 
 
 function sendMathToServer(event) {
@@ -78,11 +56,6 @@ function sendMathToServer(event) {
     let secondNumberText = Number(document.querySelector('#second-number').value);
     let answer = 0;
 
-    /** 
-    if (firstNumberText === NaN) {
-        console.log('Please enter a valid number!');
-    }
-    */
     
     axios.post('/result', { 
         firstNumber: firstNumberText,
@@ -110,34 +83,9 @@ function handleOperator(event) {
 
     let thingyyy = event.target;
 
-    //thingyyy.style.border = "thick solid black";
     thingyyy.classList.add("thick");
 };
 
-
-
-
-
-/** 
-function clearNumbersFromBoxes(event) {
-
-    console.log('Beginning clearNumbersFromBoxes');
-
-    let firstNumberText = document.querySelector('#first-number').value;
-    let secondNumberText = document.querySelector('#second-number').value;
-
-    console.log(firstNumberText);
-    console.log(secondNumberText);
-
-    firstNumberText.innerHTML.value = '';
-    secondNumberText.innerHTML.value = '';
-
-    console.log(firstNumberText);
-    console.log(secondNumberText);
-
-    console.log('End clearNumbersFromBoxes');
-}
-*/
 
 let clearButton = document.querySelector('#clear-button');
 let firstNumberInput = document.querySelectorAll('#first-number');
@@ -152,8 +100,3 @@ clearButton.addEventListener('click', () => {
     }
 
 });
-
-
-
-//SOMETHING TO TRY LATER....maybe try pushing the result to numberList instead???
-//so get rid of the results array completely? i don't fucking know lol
